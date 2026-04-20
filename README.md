@@ -10,20 +10,13 @@ Automatically posts PR creation notifications and push updates to a Slack channe
 
 ## Setup
 
-1. **Create a Slack App** at https://api.slack.com/apps
-2. **Add bot token scope**: `chat:write` under OAuth & Permissions
-3. **Install** the app to your workspace
-4. **Copy** the Bot User OAuth Token
-5. **Create config file** at `~/.config/claude-slack/config.json`:
+After installing the plugin, run the interactive setup wizard in Claude Code:
 
-```json
-{
-  "botToken": "xoxb-your-token-here",
-  "defaultChannel": "C_YOUR_CHANNEL_ID"
-}
+```bash
+/slack-pr-setup
 ```
 
-6. **Invite the bot** to your channel: `/invite @your-bot-name`
+This will walk you through creating a Slack App, configuring your bot token, selecting a channel, and validating the connection.
 
 ## Installing the plugin
 
