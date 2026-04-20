@@ -68,7 +68,17 @@ If `"ok": false` with `"channel_not_found"` or `"not_in_channel"`, tell the user
 
 If successful, confirm: "Test message sent to the channel."
 
-### 6. Write the config
+### 6. GitHub org filter (optional)
+
+Ask the user if they want to limit notifications to a specific GitHub organization.
+
+Use AskUserQuestion with options:
+- "Yes, limit to a specific org"
+- "No, notify for all repos"
+
+If yes, ask them for the GitHub org name (e.g. `my-org` from `github.com/my-org/repo`). This will be saved as `githubOrg` in the config.
+
+### 7. Write the config
 
 Create the directory and write the config:
 
@@ -77,16 +87,20 @@ mkdir -p ~/.config/claude-slack
 ```
 
 Write `~/.config/claude-slack/config.json`:
+
 ```json
 {
   "botToken": "xoxb-...",
-  "defaultChannel": "C_CHANNEL_ID"
+  "defaultChannel": "C_CHANNEL_ID",
+  "githubOrg": "my-org"
 }
 ```
 
+Omit the `githubOrg` field if the user chose not to filter by org.
+
 Also ensure `~/.config/claude-slack/threads.json` exists (create as `{}` if not).
 
-### 7. Confirm
+### 8. Confirm
 
 Tell the user:
 > "Slack PR notifications are configured. PR creation and push notifications will now post to your channel automatically."
