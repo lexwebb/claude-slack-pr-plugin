@@ -1,0 +1,15 @@
+{
+  "name": "slack-pr-notifications",
+  "description": "Slack PR notification plugin for Claude Code",
+  "owner": {
+    "name": "Lex Southin-Webb"
+  },
+  "plugins": [
+    {
+      "name": "slack-pr-notifications",
+      "description": "Automatically posts PR creation notifications and push updates to a Slack channel",
+      "version": "1.0.0",
+      "source": "./"
+    }
+  ]
+}

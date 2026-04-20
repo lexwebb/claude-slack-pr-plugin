@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(gh pr create:*)",
+            "command": "echo '{\"hookSpecificOutput\": {\"hookEventName\": \"PostToolUse\", \"additionalContext\": \"IMPORTANT: A PR was just created. You MUST invoke the slack-pr skill now to post a notification to the configured Slack channel.\"}}'",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(git push:*)",
+            "command": "echo '{\"hookSpecificOutput\": {\"hookEventName\": \"PostToolUse\", \"additionalContext\": \"IMPORTANT: Code was just pushed. You MUST invoke the slack-pr skill now to post a push update to the Slack channel thread (if a PR exists for this branch).\"}}'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
