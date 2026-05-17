@@ -6,19 +6,12 @@
         "hooks": [
           {
             "type": "command",
-            "if": "Bash(gh pr create:*)",
-            "command": "echo '{\"hookSpecificOutput\": {\"hookEventName\": \"PostToolUse\", \"additionalContext\": \"IMPORTANT: A PR was just created. You MUST invoke the slack-pr skill now to post a notification to the configured Slack channel.\"}}'",
+            "command": "cmd=$(jq -r '.tool_input.command'); case \"$cmd\" in *\"gh pr create\"*) echo '{\"hookSpecificOutput\": {\"hookEventName\": \"PostToolUse\", \"additionalContext\": \"IMPORTANT: A PR was just created. You MUST invoke the slack-pr skill now to post a notification to the configured Slack channel.\"}}' ;; esac",
             "timeout": 5
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
+          },
           {
             "type": "command",
-            "if": "Bash(git push:*)",
-            "command": "echo '{\"hookSpecificOutput\": {\"hookEventName\": \"PostToolUse\", \"additionalContext\": \"IMPORTANT: Code was just pushed. You MUST invoke the slack-pr skill now to post a push update to the Slack channel thread (if a PR exists for this branch).\"}}'",
+            "command": "cmd=$(jq -r '.tool_input.command'); case \"$cmd\" in *\"git push\"*) echo '{\"hookSpecificOutput\": {\"hookEventName\": \"PostToolUse\", \"additionalContext\": \"IMPORTANT: Code was just pushed. You MUST invoke the slack-pr skill now to post a push update to the Slack channel thread (if a PR exists for this branch).\"}}' ;; esac",
             "timeout": 5
           }
         ]
